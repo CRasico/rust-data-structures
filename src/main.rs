@@ -60,8 +60,11 @@ struct UnknownCommand {}
 
 impl ProcessableCommand for UnknownCommand {
     fn process(&self) {
-        // Print menu for how the unknown messaging should be out put
-        println!("Processing the unknown command");
+        println!(
+            r#"Unknown Command found, please see the help menu for more information.
+    -h or --help for help menu
+    -e or --exit to exit the program"#
+        );
         stdout().flush().unwrap();
     }
 }
@@ -72,7 +75,7 @@ struct HelpCommand {}
 impl ProcessableCommand for HelpCommand {
     fn process(&self) {
         // Print menu out
-        println!("Processing the help command");
+        println!("");
         stdout().flush().unwrap();
     }
 }
