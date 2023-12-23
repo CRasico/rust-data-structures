@@ -1,5 +1,5 @@
 #[derive(Debug, PartialEq)]
-pub struct LinkedList<T> {
+struct LinkedList<T> {
     head: Option<Box<ListNode<T>>>,
 }
 
