@@ -1,9 +1,12 @@
 #[derive(Debug, PartialEq)]
-struct LinkedList<T> {
+pub struct LinkedList<T> {
     head: Option<Box<ListNode<T>>>,
 }
 
-impl<T> LinkedList<T> {
+impl<T> LinkedList<T>
+where
+    T: Copy,
+{
     pub fn new() -> LinkedList<T> {
         return LinkedList { head: None };
     }
@@ -35,8 +38,8 @@ impl<T> LinkedList<T> {
         }
     }
 
-    pub fn peek(self) -> Option<T> {
-        match self.head {
+    pub fn peek(&self) -> Option<T> {
+        match self.head.as_ref() {
             Some(node) => {
                 return Some(node.data);
             }

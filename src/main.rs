@@ -1,8 +1,12 @@
 use rust_data_structures::interface::command::MainCommand;
 use rust_data_structures::interface::fetch_input_command::FetchInputCommand;
 use rust_data_structures::interface::processable_command::ProcessableCommand;
+use rust_data_structures::interface::types::help_command::HelpCommand;
 
 fn main() {
+    let introduction = HelpCommand {};
+    introduction.process();
+
     loop {
         let result = FetchInputCommand::next();
         match result {
