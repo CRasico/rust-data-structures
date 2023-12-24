@@ -3,7 +3,7 @@ use std::{
     str::FromStr,
 };
 
-use crate::{core::linked_list::LinkedList, interface::processable_command::ProcessableCommand};
+use crate::{core::linked_list::LinkedList, view::processable_command::ProcessableCommand};
 
 #[derive(Debug, PartialEq)]
 pub struct LinkedListCommand {}

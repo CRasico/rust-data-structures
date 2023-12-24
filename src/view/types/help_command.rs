@@ -1,6 +1,6 @@
 use std::io::{stdout, Write};
 
-use crate::interface::processable_command::ProcessableCommand;
+use crate::view::processable_command::ProcessableCommand;
 
 #[derive(Debug, PartialEq)]
 pub struct HelpCommand {}

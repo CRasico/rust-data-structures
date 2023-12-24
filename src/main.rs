@@ -1,7 +1,7 @@
-use rust_data_structures::interface::command::MainCommand;
-use rust_data_structures::interface::fetch_input_command::FetchInputCommand;
-use rust_data_structures::interface::processable_command::ProcessableCommand;
-use rust_data_structures::interface::types::help_command::HelpCommand;
+use rust_data_structures::view::command::MainCommand;
+use rust_data_structures::view::fetch_input_command::FetchInputCommand;
+use rust_data_structures::view::processable_command::ProcessableCommand;
+use rust_data_structures::view::types::help_command::HelpCommand;
 
 fn main() {
     let introduction = HelpCommand {};

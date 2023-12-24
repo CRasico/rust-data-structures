@@ -131,8 +131,8 @@ fn test_to_string() {
     };
     assert_eq!("1 -> None", list.to_string());
 
-    let other: LinkedList<i32> = LinkedList { head: None };
-    assert_eq!("None", other.to_string());
+    let other = LinkedList { head: None };
+    assert_eq!("-> None", other.to_string());
 }
 
 #[derive(Debug, PartialEq)]

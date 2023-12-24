@@ -3,7 +3,7 @@ use std::{
     str::FromStr,
 };
 
-use crate::interface::command::MainCommand;
+use crate::view::command::MainCommand;
 
 pub struct FetchInputCommand {}
 
