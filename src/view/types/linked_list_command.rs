@@ -23,7 +23,7 @@ impl ProcessableCommand for LinkedListCommand {
                 }
                 Ok(operation) => match operation {
                     LinkedListOperation::Unknown => {
-                        println!("Unknown command reached!");
+                        println!("Input command unknown, please try again.");
                         stdout().flush().unwrap();
                     }
                     LinkedListOperation::IsEmpty => {
