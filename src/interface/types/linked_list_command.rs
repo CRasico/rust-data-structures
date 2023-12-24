@@ -45,7 +45,7 @@ impl ProcessableCommand for LinkedListCommand {
                         linked_list.pop();
                     }
                     LinkedListOperation::Print => {
-                        println!("{:?}", linked_list);
+                        println!("{}", linked_list.to_string());
                     }
                     LinkedListOperation::Exit => {
                         return;

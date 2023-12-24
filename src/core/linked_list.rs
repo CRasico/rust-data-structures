@@ -6,6 +6,7 @@ pub struct LinkedList<T> {
 impl<T> LinkedList<T>
 where
     T: Copy,
+    T: std::fmt::Debug,
 {
     pub fn new() -> LinkedList<T> {
         return LinkedList { head: None };
@@ -44,6 +45,13 @@ where
                 return Some(node.data);
             }
             None => return None,
+        }
+    }
+
+    pub fn to_string(&self) -> String {
+        match self.head.as_ref() {
+            Some(node) => return node.to_string(),
+            None => return String::from("None"),
         }
     }
 }
@@ -102,7 +110,7 @@ fn test_linked_list_pop() {
 }
 
 #[test]
-fn peek() {
+fn test_peek() {
     let list = LinkedList {
         head: Some(Box::new(ListNode {
             data: 1,
@@ -113,13 +121,30 @@ fn peek() {
     assert_eq!(1, list.peek().unwrap());
 }
 
+#[test]
+fn test_to_string() {
+    let list = LinkedList {
+        head: Some(Box::new(ListNode {
+            data: 1,
+            next: None,
+        })),
+    };
+    assert_eq!("1 -> None", list.to_string());
+
+    let other: LinkedList<i32> = LinkedList { head: None };
+    assert_eq!("None", other.to_string());
+}
+
 #[derive(Debug, PartialEq)]
 struct ListNode<T> {
     data: T,
     next: Option<Box<ListNode<T>>>,
 }
 
-impl<T> ListNode<T> {
+impl<T> ListNode<T>
+where
+    T: std::fmt::Debug,
+{
     fn new(data: T) -> ListNode<T> {
         return ListNode { data, next: None };
     }
@@ -135,6 +160,14 @@ impl<T> ListNode<T> {
         }
 
         return self;
+    }
+
+    pub fn to_string(&self) -> String {
+        let next_string = match self.next.as_ref() {
+            Some(node) => node.to_string(),
+            None => String::from("None"),
+        };
+        return format!("{:?} -> {}", self.data, next_string);
     }
 }
 
@@ -165,4 +198,21 @@ fn test_list_node_push() {
     list_node.push(2).push(3);
 
     assert_eq!(expected, list_node);
+}
+
+#[test]
+fn test_list_print() {
+    let expected = String::from("1 -> 2 -> 3 -> None");
+    let list = ListNode {
+        data: 1,
+        next: Some(Box::new(ListNode {
+            data: 2,
+            next: Some(Box::new(ListNode {
+                data: 3,
+                next: None,
+            })),
+        })),
+    };
+
+    assert_eq!(expected, list.to_string());
 }
