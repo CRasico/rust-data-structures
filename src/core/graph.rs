@@ -1,3 +1,8 @@
+pub struct RotationalGraph<T> {
+    node: Option<GraphNode<T>>,
+    list: Vec<GraphNode<T>>,
+}
+
 #[derive(Debug, PartialEq)]
 pub struct GraphNode<T> {
     data: T,

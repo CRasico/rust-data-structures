@@ -78,7 +78,7 @@ impl LinkedListCommand {
         }
 
         // parse command option
-        let result = parse_operation(input);
+        let result = Self::parse_operation(input);
         if result.is_err() {
             return Err(String::from("failed to process the main command"));
         }
@@ -88,7 +88,36 @@ impl LinkedListCommand {
 
         match result {
             Ok(operation) => Ok(operation),
-            Err(parse_error) => Err(parse_error.message),
+            Err(parse_error) => Err(String::from(parse_error)),
+        }
+    }
+
+    fn parse_operation(input: &str) -> Result<LinkedListOperation, &str> {
+        match input.trim() {
+            "--is-empy" | "-ie" => Ok(LinkedListOperation::IsEmpty),
+            "--push" | "-ps" => {
+                let input = &mut String::new();
+
+                print!("Please enter a number: ");
+                stdout().flush().unwrap();
+
+                let result = stdin().read_line(input);
+                if result.is_err() {
+                    return Err("An error occured reading from the standard input");
+                }
+
+                let number_result = input.trim().parse::<i32>();
+                if number_result.is_err() {
+                    return Err("The given input was not a number");
+                }
+
+                return Ok(LinkedListOperation::Push(number_result.unwrap()));
+            }
+            "--pop" | "-pp" => Ok(LinkedListOperation::Pop),
+            "--peek" | "-pk" => Ok(LinkedListOperation::Peek),
+            "--print" | "-p" => Ok(LinkedListOperation::Print),
+            "--exit" | "-e" => Ok(LinkedListOperation::Exit),
+            _ => Ok(LinkedListOperation::Unknown),
         }
     }
 }
@@ -101,33 +130,4 @@ enum LinkedListOperation {
     Peek,
     Print,
     Exit,
-}
-
-fn parse_operation(input: &str) -> Result<LinkedListOperation, &str> {
-    match input.trim() {
-        "--is-empy" | "-ie" => Ok(LinkedListOperation::IsEmpty),
-        "--push" | "-ps" => {
-            let input = &mut String::new();
-
-            print!("Please enter a number: ");
-            stdout().flush().unwrap();
-
-            let result = stdin().read_line(input);
-            if result.is_err() {
-                return Err("An error occured reading from the standard input");
-            }
-
-            let number_result = input.trim().parse::<i32>();
-            if number_result.is_err() {
-                return Err("The given input was not a number");
-            }
-
-            return Ok(LinkedListOperation::Push(number_result.unwrap()));
-        }
-        "--pop" | "-pp" => Ok(LinkedListOperation::Pop),
-        "--peek" | "-pk" => Ok(LinkedListOperation::Peek),
-        "--print" | "-p" => Ok(LinkedListOperation::Print),
-        "--exit" | "-e" => Ok(LinkedListOperation::Exit),
-        _ => Ok(LinkedListOperation::Unknown),
-    }
 }
