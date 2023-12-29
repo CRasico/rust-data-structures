@@ -14,6 +14,7 @@ fn main() {
                 MainCommand::Exit => return,
                 MainCommand::Help(command) => command.process(),
                 MainCommand::LinkedList(command) => command.process(),
+                MainCommand::Graph(command) => command.process(),
                 MainCommand::Unknown(command) => command.process(),
             },
             Err(message) => panic!("{}", message),

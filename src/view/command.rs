@@ -1,7 +1,7 @@
 use std::str::FromStr;
 
 use super::types::{
-    help_command::HelpCommand, linked_list_command::LinkedListCommand,
+    graph_command::GraphCommand, help_command::HelpCommand, linked_list_command::LinkedListCommand,
     unknown_command::UnknownCommand,
 };
 
@@ -11,6 +11,7 @@ pub enum MainCommand {
     Exit,
     Help(HelpCommand),
     LinkedList(LinkedListCommand),
+    Graph(GraphCommand),
 }
 
 impl FromStr for MainCommand {
@@ -21,6 +22,7 @@ impl FromStr for MainCommand {
             "--exit" | "-e" => Ok(MainCommand::Exit),
             "--help" | "-h" => Ok(MainCommand::Help(HelpCommand {})),
             "--linkedList" | "-ll" => Ok(MainCommand::LinkedList(LinkedListCommand {})),
+            "--graph" | "g" => Ok(MainCommand::Graph(GraphCommand {})),
             _ => Ok(MainCommand::Unknown(UnknownCommand {})),
         }
     }

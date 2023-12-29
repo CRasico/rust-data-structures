@@ -6,7 +6,7 @@ pub struct RotationalGraph<T> {
 }
 
 impl<T> RotationalGraph<T> {
-    fn new() -> RotationalGraph<T> {
+    pub fn new() -> RotationalGraph<T> {
         return RotationalGraph {
             node_ptr: None,
             size: 0,
@@ -14,7 +14,7 @@ impl<T> RotationalGraph<T> {
         };
     }
 
-    fn add(&mut self, node: GraphNode<T>) -> &Self {
+    pub fn add(&mut self, node: GraphNode<T>) -> &Self {
         self.list.push(node);
         if self.node_ptr.is_none() {
             self.node_ptr = Some(0);
@@ -22,7 +22,21 @@ impl<T> RotationalGraph<T> {
         return self;
     }
 
-    fn get_current(&self) -> Option<&GraphNode<T>> {
+    pub fn remove(&mut self) -> &Self {
+        match self.node_ptr {
+            Some(value) => {
+                self.list.remove(value);
+                if self.list.len() == 0 {
+                    self.node_ptr = None;
+                }
+            }
+            None => {}
+        }
+
+        return self;
+    }
+
+    pub fn get_current(&self) -> Option<&GraphNode<T>> {
         match self.node_ptr {
             Some(value) => {
                 let node = &self.list[value];
@@ -32,7 +46,7 @@ impl<T> RotationalGraph<T> {
         }
     }
 
-    fn rotate_current(&mut self) -> &Self {
+    pub fn rotate_current(&mut self) -> &Self {
         match self.node_ptr {
             Some(ptr) => {
                 if (ptr + 1) == self.size {

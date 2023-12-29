@@ -79,7 +79,6 @@ impl LinkedListCommand {
             ));
         }
 
-        // parse command option
         let result = Self::parse_operation(input);
         if result.is_err() {
             return Err(String::from("failed to process the main command"));
