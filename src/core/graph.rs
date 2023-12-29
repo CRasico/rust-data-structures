@@ -1,6 +1,63 @@
+#[derive(Debug, PartialEq)]
 pub struct RotationalGraph<T> {
-    node: Option<GraphNode<T>>,
+    node_ptr: Option<usize>,
+    size: usize,
     list: Vec<GraphNode<T>>,
+}
+
+impl<T> RotationalGraph<T> {
+    fn new() -> RotationalGraph<T> {
+        return RotationalGraph {
+            node_ptr: None,
+            size: 0,
+            list: Vec::new(),
+        };
+    }
+
+    fn add(&mut self, node: GraphNode<T>) -> &Self {
+        self.list.push(node);
+        if self.node_ptr.is_none() {
+            self.node_ptr = Some(0);
+        }
+        return self;
+    }
+
+    fn get_current(&self) -> Option<&GraphNode<T>> {
+        match self.node_ptr {
+            Some(value) => {
+                let node = &self.list[value];
+                return Some(node);
+            }
+            None => return None,
+        }
+    }
+
+    fn rotate_current(&mut self) -> &Self {
+        match self.node_ptr {
+            Some(ptr) => {
+                if (ptr + 1) == self.size {
+                    self.node_ptr = Some(0)
+                } else {
+                    self.node_ptr = Some(ptr + 1);
+                }
+            }
+            None => {}
+        }
+        return self;
+    }
+}
+
+#[test]
+fn test_rotational_graph_constructor() {
+    let expected: RotationalGraph<i32> = RotationalGraph {
+        node_ptr: None,
+        size: 0,
+        list: Vec::new(),
+    };
+
+    let result: RotationalGraph<i32> = RotationalGraph::new();
+
+    assert_eq!(result, expected);
 }
 
 #[derive(Debug, PartialEq)]
