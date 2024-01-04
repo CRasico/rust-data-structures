@@ -50,7 +50,15 @@ impl ProcessableCommand for GraphCommand {
 }
 
 impl GraphCommand {
-    fn print_help_menu() {}
+    fn print_help_menu() {
+        println!("** Welcome to the Rotational Graph**");
+        println!("Available Commands");
+        println!("-e, --exit: will allow you to exit the appliation");
+        println!("-h, --help: will open this exact helper menu");
+        println!(
+            "-prf --print-from-current: will allow you to print the graph from the current node"
+        );
+    }
 
     fn fetch_operation() -> Result<GraphOperation, String> {
         let stdin = stdin();

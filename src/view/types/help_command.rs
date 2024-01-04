@@ -13,7 +13,8 @@ impl ProcessableCommand for HelpCommand {
         println!("Available Commands");
         println!("-e, --exit: will allow you to exit the appliation");
         println!("-h, --help: will open this exact helper menu");
-        println!("-ll, --linkedList: will allow you to exit the appliation");
+        println!("-ll, --linkedList: will allow you to edit and update a linked list");
+        println!("-g, --graph: will allow you to edit and update a rotational graph");
         stdout().flush().unwrap();
     }
 }
